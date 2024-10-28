@@ -1,8 +1,8 @@
 #pragma once
 
 #include "int.h"
+#include "port.h"
 
-#define IBOS_PTR_MAX_ALIGNMENT 8
-
-bool IBOS_ptr_aligned(uptr ptr, usize alignment);
+bool IBOS_ptr_is_alignment(usize alignment);
+bool IBOS_ptr_is_aligned(uptr ptr, usize alignment);
 usize IBOS_ptr_get_aligned(uptr ptr, usize alignment);

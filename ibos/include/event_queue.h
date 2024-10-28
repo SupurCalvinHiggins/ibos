@@ -1,24 +1,33 @@
-typedef u8 IBOS_event_id;
-typedef IBOS_memory_block IBOS_event_data;
+#pragma once
+
+#include "int.h"
+#include "memory.h"
+#include "port.h"
+
+typedef u8 IBOS_event_id_t;
+typedef IBOS_memory_block_t IBOS_event_data_t;
 
 typedef struct {
-	IBOS_event_id event_id;
-	IBOS_event_data event_data;
-} IBOS_event;
+  IBOS_event_id_t event_id;
+  IBOS_event_data_t event_data;
+} IBOS_event_t;
 
 typedef struct {
-	IBOS_event* events;
-	size_t capacity;
-	size_t size;
-} IBOS_event_queue;
+  IBOS_event_t *base;
+  usize start;
+  usize end;
+  usize capacity;
+} IBOS_event_queue_t;
 
-IBOS_event_queue IBOS_event_queue_allocate(size_t capacity);
-void IBOS_event_queue_deallocate(IBOS_event_queue event_queue);
+#define IBOS_EVENT_QUEUE_ALIGNMENT IBOS_PORT_STRUCT_ALIGNMENT
 
-void push(IBOS_event_queue event_queue, IBOS_event event);
-void pop(IBOS_event_queue event_queue);
+IBOS_event_queue_t IBOS_event_queue_static_allocate(usize capacity);
+IBOS_event_queue_t IBOS_event_queue_allocate(usize capacity);
+void IBOS_event_queue_deallocate(IBOS_event_queue_t *queue);
 
-IBOS_event peek(IBOS_event_queue event_queue);
-size_t size(IBOS_event_queue event_queue);
-bool is_empty(IBOS_event_queue event_queue);
-bool is_full(IBOS_event_queue event_queue);
+void IBOS_event_queue_push(IBOS_event_queue_t *queue, IBOS_event_t event);
+void IBOS_event_queue_pop(IBOS_event_queue_t *queue);
+
+IBOS_event_t IBOS_event_queue_peek(IBOS_event_queue_t queue);
+usize IBOS_event_queue_size(IBOS_event_queue_t queue);
+usize IBOS_event_queue_capacity(IBOS_event_queue_t queue);

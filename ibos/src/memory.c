@@ -26,8 +26,10 @@ void IBOS_memory_initialize(IBOS_memory_block_t memory) {
   IBOS_memory.high_ptr = IBOS_memory.static_high_ptr;
 }
 
+// TODO: fix alignment.
 IBOS_memory_block_t IBOS_memory_static_allocate(usize size, usize alignment) {
   IBOS_assert(IBOS_memory.state == STATIC_ALLOCATE);
+  IBOS_assert(IBOS_ptr_is_alignment(alignment));
   IBOS_memory.static_low_ptr =
       IBOS_ptr_get_aligned(IBOS_memory.static_low_ptr, alignment);
   IBOS_assert(size <= IBOS_memory.static_high_ptr - IBOS_memory.static_low_ptr);
@@ -45,10 +47,13 @@ IBOS_memory_block_t IBOS_memory_allocate(usize size, usize alignment) {
     IBOS_assert(IBOS_memory.low_ptr <= IBOS_memory.high_ptr);
   }
   IBOS_assert(IBOS_memory.state == DYNAMIC_ALLOCATE);
-  // TODO.
+  IBOS_assert(IBOS_ptr_is_alignment(alignment));
+  // TODO: implement.
+  IBOS_assert(false);
 }
 
 void IBOS_memory_deallocate(IBOS_memory_block_t block) {
   IBOS_assert(IBOS_memory.state == DYNAMIC_ALLOCATE);
-  // TODO.
+  // TODO: implement.
+  IBOS_assert(false);
 }
