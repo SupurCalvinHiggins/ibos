@@ -1,2 +1,2 @@
 # ibos
-Interrupt-Based Operating System (IBOS) 💿
+💿 Interrupt-Based Operating System (IBOS)
