@@ -20,7 +20,7 @@ void bench_memory(usize size, usize allocations, usize samples) {
   IBOS_memory_initialize(memory);
 
   IBOS_memory_block_t blocks[allocations];
-  printf("allocating %zu bytes %zu times ... ", size, allocations);
+  printf("allocating %zu bytes %zu times \t... \t", size, allocations);
 
   clock_t begin = clock();
   for (usize i = 0; i < samples; ++i) {
@@ -43,11 +43,12 @@ void bench_memory(usize size, usize allocations, usize samples) {
 int main(void) {
   usize sizes[] = {1, 4, 16, 64, 256, 512};
   usize allocations[] = {1, 4, 16, 64, 256, 512};
-  usize samples = 1000000;
+  usize samples = 1048576;
 
   for (usize i = 0; i < sizeof(sizes) / sizeof(usize); ++i) {
     for (usize j = 0; j < sizeof(allocations) / sizeof(usize); ++j) {
-      bench_memory(sizes[i], allocations[j], samples);
+      bench_memory(sizes[i], allocations[j],
+                   samples / (sizes[i] * allocations[j]));
     }
   }
 }

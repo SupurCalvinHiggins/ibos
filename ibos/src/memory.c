@@ -129,8 +129,7 @@ static usize IBOS_memory_slab_metas_find_small(void) {
 
   usize slab_j = IBOS_memory_find_set(filter) / 2;
   usize slab = 16 * slab_i + slab_j;
-  IBOS_ensure((IBOS_memory_slab_metas_get(slab) == SLAB_META_LARGE) ||
-              (IBOS_memory_slab_metas_get(slab) == SLAB_META_SMALL));
+  IBOS_ensure(IBOS_memory_slab_metas_get(slab) == SLAB_META_SMALL);
   return slab;
 }
 
@@ -268,7 +267,7 @@ void IBOS_memory_initialize(IBOS_memory_block_t block) {
   IBOS_memory.slabs_len = slabs_len;
 
   usize slab_metas_size =
-      4 * (IBOS_memory.slabs_len / 16 + (IBOS_memory.slabs_len & 0xF) != 0);
+      4 * ((IBOS_memory.slabs_len / 16) + ((IBOS_memory.slabs_len & 0xF) != 0));
   usize block_metas_size = 4 * IBOS_memory.slabs_len;
 
   IBOS_memory.slab_metas = (u32 *)aligned_ptr;
