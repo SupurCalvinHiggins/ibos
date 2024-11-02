@@ -5,16 +5,14 @@
 IBOS_event_queue_t IBOS_event_queue_static_allocate(usize capacity) {
   IBOS_assert(IBOS_ptr_is_alignment(capacity));
   usize allocation_size = sizeof(IBOS_event_t) * capacity;
-  IBOS_memory_block_t block =
-      IBOS_memory_static_allocate(allocation_size, IBOS_EVENT_QUEUE_ALIGNMENT);
+  IBOS_memory_block_t block = IBOS_memory_allocate(allocation_size);
   return (IBOS_event_queue_t){block.ptr, capacity, 0, capacity};
 }
 
 IBOS_event_queue_t IBOS_event_queue_allocate(usize capacity) {
   IBOS_assert(IBOS_ptr_is_alignment(capacity));
   usize allocation_size = sizeof(IBOS_event_t) * capacity;
-  IBOS_memory_block_t block =
-      IBOS_memory_allocate(allocation_size, IBOS_EVENT_QUEUE_ALIGNMENT);
+  IBOS_memory_block_t block = IBOS_memory_allocate(allocation_size);
   return (IBOS_event_queue_t){block.ptr, capacity, 0, capacity};
 }
 

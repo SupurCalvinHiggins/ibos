@@ -19,9 +19,6 @@ typedef struct {
   usize capacity;
 } IBOS_event_queue_t;
 
-#define IBOS_EVENT_QUEUE_ALIGNMENT IBOS_PORT_STRUCT_ALIGNMENT
-
-IBOS_event_queue_t IBOS_event_queue_static_allocate(usize capacity);
 IBOS_event_queue_t IBOS_event_queue_allocate(usize capacity);
 void IBOS_event_queue_deallocate(IBOS_event_queue_t *queue);
 
