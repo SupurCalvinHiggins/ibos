@@ -1,14 +1,7 @@
+#include "../../include/memory.h"
 #include <stdalign.h>
 #include <stdio.h>
 #include <time.h>
-
-#define IBOS_BENCH_MOCK_MEMORY 1
-
-#if IBOS_BENCH_MOCK_MEMORY != 0
-#include "../test/mock/include/mock_memory.h"
-#else
-#include "../include/memory.h"
-#endif
 
 static void escape(void *p) { asm volatile("" : : "g"(p) : "memory"); }
 

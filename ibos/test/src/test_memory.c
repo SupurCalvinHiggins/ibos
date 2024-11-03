@@ -1,9 +1,9 @@
-#include "../include/assert.h"
-#include "../include/int.h"
-#include "../include/memory.h"
-#include "../include/port.h"
-#include "../include/ptr.h"
-#include "helper/include/test.h"
+#include "../../include/assert.h"
+#include "../../include/int.h"
+#include "../../include/memory.h"
+#include "../../include/port.h"
+#include "../../include/ptr.h"
+#include "../include/test.h"
 #include <stdalign.h>
 
 #define IBOS_HELPER_MIN(a, b) ((a) < (b) ? (a) : (b))

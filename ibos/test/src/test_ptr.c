@@ -1,6 +1,6 @@
-#include "../include/assert.h"
-#include "../include/ptr.h"
-#include "helper/include/test.h"
+#include "../../include/assert.h"
+#include "../../include/ptr.h"
+#include "../include/test.h"
 
 void IBOS_test_ptr_is_alignment(void) {
   IBOS_TEST_START();

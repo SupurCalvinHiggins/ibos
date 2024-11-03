@@ -1,6 +1,6 @@
-#include "../include/mock_memory.h"
-#include "../../../include/assert.h"
-#include "../../../include/port.h"
+#include "../../include/memory.h"
+#include "../../include/assert.h"
+#include "../../include/port.h"
 #include <string.h>
 
 void IBOS_memory_initialize(IBOS_memory_block_t block) {}

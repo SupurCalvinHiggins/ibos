@@ -1,7 +1,7 @@
-#include "../include/assert.h"
-#include "../include/event_queue.h"
-#include "helper/include/test.h"
-#include "mock/include/mock_memory.h"
+#include "../../include/assert.h"
+#include "../../include/event_queue.h"
+#include "../../include/memory.h"
+#include "../include/test.h"
 #include <string.h>
 
 void IBOS_helper_memory_initialize(void) {

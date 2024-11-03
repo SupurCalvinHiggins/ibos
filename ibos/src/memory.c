@@ -31,7 +31,7 @@ static usize IBOS_memory_find_set(u32 x) {
   usize idx = (((x & 0xFFFF0000) != 0) << 4) | (((x & 0xFF00FF00) != 0) << 3) |
               (((x & 0xF0F0F0F0) != 0) << 2) | (((x & 0xCCCCCCCC) != 0) << 1) |
               ((x & 0xAAAAAAAA) != 0);
-  IBOS_ensure(x == (1 << idx));
+  IBOS_ensure(x == (1U << idx));
   return idx;
 }
 
@@ -41,7 +41,7 @@ static usize IBOS_memory_find_unset(u32 x) {
   usize idx = (((x & 0xFFFF0000) != 0) << 4) | (((x & 0xFF00FF00) != 0) << 3) |
               (((x & 0xF0F0F0F0) != 0) << 2) | (((x & 0xCCCCCCCC) != 0) << 1) |
               ((x & 0xAAAAAAAA) != 0);
-  IBOS_ensure(x == (1 << idx));
+  IBOS_ensure(x == (1U << idx));
   return idx;
 }
 
@@ -261,7 +261,7 @@ void IBOS_memory_initialize(IBOS_memory_block_t block) {
 
   uptr aligned_ptr = IBOS_ptr_get_aligned(ptr, IBOS_PORT_STRUCT_ALIGNMENT);
   usize aligned_size = size - (aligned_ptr - ptr);
-  IBOS_assert(aligned_size >= 0);
+  IBOS_assert(aligned_size <= size);
 
   usize approx_slabs_len = aligned_size / LARGE_BLOCK_SIZE;
   usize slabs_len =
