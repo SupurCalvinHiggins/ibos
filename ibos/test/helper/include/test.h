@@ -3,7 +3,7 @@
 
 #define IBOS_TEST_START()                                                      \
   {                                                                            \
-    fprintf(stderr, "%s ... ", __func__);                                      \
+    fprintf(stderr, "%-48s... \t", __func__);                                  \
     fflush(stderr);                                                            \
   }
 #define IBOS_TEST_END()                                                        \

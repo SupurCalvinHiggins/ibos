@@ -200,6 +200,8 @@ static IBOS_memory_block_t IBOS_memory_allocate_large() {
 }
 
 IBOS_memory_block_t IBOS_memory_allocate(usize size) {
+  IBOS_require(IBOS_memory.slabs != 0,
+               "allocation failed: memory not initialized");
   IBOS_require(size <= LARGE_BLOCK_SIZE,
                "allocation failed: size exceeded maximum allocation");
   return size <= SMALL_BLOCK_SIZE ? IBOS_memory_allocate_small()
@@ -238,6 +240,8 @@ static void IBOS_memory_deallocate_large(uptr ptr) {
 }
 
 void IBOS_memory_deallocate(IBOS_memory_block_t block) {
+  IBOS_require(IBOS_memory.slabs != 0,
+               "deallocation failed: memory not initialized");
   IBOS_require(block.size <= LARGE_BLOCK_SIZE,
                "deallocation failed: size exceeded maximum allocation");
   IBOS_require((uptr)(block.ptr + block.size) <=
