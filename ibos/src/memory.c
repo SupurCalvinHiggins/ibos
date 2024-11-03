@@ -58,17 +58,17 @@ static usize IBOS_memory_find_unset(u32 x) {
 
 static u32 IBOS_memory_slab_metas_get(usize slab) {
   IBOS_require(slab < IBOS_memory.slabs_len);
-  usize shift = 2 * (slab % 32);
-  return (IBOS_memory.slab_metas[slab / 32] & (SLAB_META_MASK << shift)) >>
+  usize shift = 2 * (slab % 16);
+  return (IBOS_memory.slab_metas[slab / 16] & (SLAB_META_MASK << shift)) >>
          shift;
 }
 
 static void IBOS_memory_slab_metas_set(usize slab, u32 type) {
   IBOS_require(slab < IBOS_memory.slabs_len);
   IBOS_require((type & SLAB_META_MASK) == type);
-  usize shift = 2 * (slab % 32);
-  IBOS_memory.slab_metas[slab / 32] &= ~(SLAB_META_MASK << shift);
-  IBOS_memory.slab_metas[slab / 32] |= type << shift;
+  usize shift = 2 * (slab % 16);
+  IBOS_memory.slab_metas[slab / 16] &= ~(SLAB_META_MASK << shift);
+  IBOS_memory.slab_metas[slab / 16] |= type << shift;
   IBOS_ensure(IBOS_memory_slab_metas_get(slab) == type);
 }
 
@@ -90,9 +90,10 @@ static usize IBOS_memory_slab_metas_find_large(void) {
   }
 
   // Handle the partial meta if it exists.
+  // TODO: wrong?
   if (slab_i == IBOS_memory.slabs_len / 16 &&
       (IBOS_memory.slabs_len & 0xF) != 0) {
-    if ((filter & ((1 << (IBOS_memory.slabs_len & 0xF) * 2) - 1)) == 0) {
+    if ((filter & ((1 << ((IBOS_memory.slabs_len & 0xF) * 2)) - 1)) == 0) {
       ++slab_i;
     }
   }
