@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../port/include/port.h"
 #include "int.h"
 #include "memory.h"
-#include "port.h"
 
 typedef u8 IBOS_event_id_t;
 typedef IBOS_memory_block_t IBOS_event_data_t;

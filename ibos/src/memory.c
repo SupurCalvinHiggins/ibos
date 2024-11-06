@@ -1,7 +1,8 @@
 #include "../include/memory.h"
 #include "../include/assert.h"
-#include "../include/port.h"
 #include "../include/ptr.h"
+#include "../include/task.h"
+#include "../port/include/port.h"
 
 /* memory */
 
@@ -200,12 +201,16 @@ static IBOS_memory_block_t IBOS_memory_allocate_large() {
 }
 
 IBOS_memory_block_t IBOS_memory_allocate(usize size) {
+  IBOS_task_enter_critical();
   IBOS_require(IBOS_memory.slabs != 0,
                "allocation failed: memory not initialized");
   IBOS_require(size <= LARGE_BLOCK_SIZE,
                "allocation failed: size exceeded maximum allocation");
-  return size <= SMALL_BLOCK_SIZE ? IBOS_memory_allocate_small()
+  IBOS_memory_block_t block = size <= SMALL_BLOCK_SIZE
+                                  ? IBOS_memory_allocate_small()
                                   : IBOS_memory_allocate_large();
+  IBOS_task_exit_critical();
+  return block;
 }
 
 static void IBOS_memory_deallocate_small(uptr ptr) {
@@ -240,6 +245,7 @@ static void IBOS_memory_deallocate_large(uptr ptr) {
 }
 
 void IBOS_memory_deallocate(IBOS_memory_block_t block) {
+  IBOS_task_enter_critical();
   IBOS_require(IBOS_memory.slabs != 0,
                "deallocation failed: memory not initialized");
   IBOS_require(block.size <= LARGE_BLOCK_SIZE,
@@ -253,6 +259,7 @@ void IBOS_memory_deallocate(IBOS_memory_block_t block) {
   block.size <= SMALL_BLOCK_SIZE
       ? IBOS_memory_deallocate_small((uptr)block.ptr)
       : IBOS_memory_deallocate_large((uptr)block.ptr);
+  IBOS_task_exit_critical();
 }
 
 void IBOS_memory_initialize(IBOS_memory_block_t block) {
