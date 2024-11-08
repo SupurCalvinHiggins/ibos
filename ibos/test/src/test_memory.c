@@ -1,12 +1,10 @@
 #include "../../include/assert.h"
 #include "../../include/int.h"
 #include "../../include/memory.h"
-#include "../../include/port.h"
 #include "../../include/ptr.h"
+#include "../../port/include/port.h"
 #include "../include/test.h"
 #include <stdalign.h>
-
-#define IBOS_HELPER_MIN(a, b) ((a) < (b) ? (a) : (b))
 
 usize IBOS_helper_overlap(IBOS_memory_block_t block1,
                           IBOS_memory_block_t block2) {
@@ -23,7 +21,8 @@ usize IBOS_helper_overlap(IBOS_memory_block_t block1,
     return 0;
   }
 
-  return IBOS_HELPER_MIN(block1.ptr + block1.size - block2.ptr, block2.size);
+  usize cand_size = block1.size + block2.ptr - block1.ptr;
+  return cand_size < block2.size ? cand_size : block2.size;
 }
 
 void IBOS_test_memory_allocate_tiny(void) {

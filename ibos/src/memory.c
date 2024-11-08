@@ -145,16 +145,14 @@ static usize IBOS_memory_slab_metas_find_small(void) {
 #define BLOCK_META_EMPTY 0x0
 #define BLOCK_META_FULL 0xFFFFFFFF
 
-static bool IBOS_memory_block_meta_slab_full(usize slab, usize block) {
+static bool IBOS_memory_block_meta_slab_full(usize slab) {
   IBOS_require(slab < IBOS_memory.slabs_len);
-  IBOS_require(block < 32);
-  return IBOS_memory.block_metas[block] == BLOCK_META_FULL;
+  return IBOS_memory.block_metas[slab] == BLOCK_META_FULL;
 }
 
-static bool IBOS_memory_block_meta_slab_empty(usize slab, usize block) {
+static bool IBOS_memory_block_meta_slab_empty(usize slab) {
   IBOS_require(slab < IBOS_memory.slabs_len);
-  IBOS_require(block < 32);
-  return IBOS_memory.block_metas[block] == BLOCK_META_EMPTY;
+  return IBOS_memory.block_metas[slab] == BLOCK_META_EMPTY;
 }
 
 static u32 IBOS_memory_block_meta_get(usize slab, usize block) {
@@ -178,13 +176,13 @@ static IBOS_memory_block_t IBOS_memory_allocate_small() {
   usize slab = IBOS_memory_slab_metas_find_small();
   usize block = IBOS_memory_find_unset(IBOS_memory.block_metas[slab]);
 
-  if (IBOS_memory.block_metas[slab] == BLOCK_META_EMPTY) {
+  if (IBOS_memory_block_meta_slab_empty(slab)) {
     IBOS_memory_slab_metas_set(slab, SLAB_META_SMALL);
   }
 
   IBOS_memory_block_meta_set(slab, block, BLOCK_META_ALLOCATED);
 
-  if (IBOS_memory.block_metas[slab] == BLOCK_META_FULL) {
+  if (IBOS_memory_block_meta_slab_full(slab)) {
     IBOS_memory_slab_metas_set(slab, SLAB_META_FULL_SMALL);
   }
 
@@ -225,13 +223,13 @@ static void IBOS_memory_deallocate_small(uptr ptr) {
   IBOS_require(IBOS_memory_block_meta_get(slab, block) == BLOCK_META_ALLOCATED,
                "deallocation failed: small block already free");
 
-  if (IBOS_memory.block_metas[slab] == BLOCK_META_FULL) {
+  if (IBOS_memory_block_meta_slab_full(slab)) {
     IBOS_memory_slab_metas_set(slab, SLAB_META_SMALL);
   }
 
   IBOS_memory_block_meta_set(slab, block, BLOCK_META_DEALLOCATED);
 
-  if (IBOS_memory.block_metas[slab] == BLOCK_META_EMPTY) {
+  if (IBOS_memory_block_meta_slab_empty(slab)) {
     IBOS_memory_slab_metas_set(slab, SLAB_META_LARGE);
   }
 }

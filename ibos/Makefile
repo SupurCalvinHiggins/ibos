@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 LDFLAGS = 
 
-BUILD = debug
+BUILD = release
+PORT = mock
 
 ifeq ($(BUILD),debug)
 	CFLAGS += -g -Og
@@ -16,21 +17,25 @@ SRCS_DIR = src
 TEST_SRCS_DIR = test/src
 BENCH_SRCS_DIR = bench/src
 MOCK_SRCS_DIR = mock/src
+PORT_SRCS_DIR = port/src/$(PORT)
 
 SRCS = $(wildcard $(SRCS_DIR)/*.c)
 TEST_SRCS = $(wildcard $(TEST_SRCS_DIR)/*.c)
 BENCH_SRCS = $(wildcard $(BENCH_SRCS_DIR)/*.c)
 MOCK_SRCS = $(wildcard $(MOCK_SRCS_DIR)/*.c)
+PORT_SRCS = $(wildcard $(PORT_SRCS_DIR)/*.c)
 
 OBJS_DIR = $(BUILD_DIR)/$(SRCS_DIR)
 TEST_OBJS_DIR = $(BUILD_DIR)/$(TEST_SRCS_DIR)
 BENCH_OBJS_DIR = $(BUILD_DIR)/$(BENCH_SRCS_DIR)
 MOCK_OBJS_DIR = $(BUILD_DIR)/$(MOCK_SRCS_DIR)
+PORT_OBJS_DIR = $(BUILD_DIR)/$(PORT_SRCS_DIR)
 
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 TEST_OBJS = $(patsubst $(TEST_SRCS_DIR)/%.c,$(TEST_OBJS_DIR)/%.o,$(TEST_SRCS))
 BENCH_OBJS = $(patsubst $(BENCH_SRCS_DIR)/%.c,$(BENCH_OBJS_DIR)/%.o,$(BENCH_SRCS))
 MOCK_OBJS = $(patsubst $(MOCK_SRCS_DIR)/%.c,$(MOCK_OBJS_DIR)/%.o,$(MOCK_SRCS))
+PORT_OBJS = $(patsubst $(PORT_SRCS_DIR)/%.c,$(PORT_OBJS_DIR)/%.o,$(PORT_SRCS))
 
 TEST_TARGETS = $(TEST_OBJS:.o=)
 BENCH_TARGETS = $(BENCH_OBJS:.o=)
@@ -56,6 +61,9 @@ $(BENCH_OBJS_DIR): | $(BUILD_DIR)
 $(MOCK_OBJS_DIR): | $(BUILD_DIR)
 	mkdir -p $(MOCK_OBJS_DIR)
 
+$(PORT_OBJS_DIR): | $(BUILD_DIR)
+	mkdir -p $(PORT_OBJS_DIR)
+
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -68,22 +76,25 @@ $(BENCH_OBJS_DIR)/%.o: $(BENCH_SRCS_DIR)/%.c | $(BENCH_OBJS_DIR)
 $(MOCK_OBJS_DIR)/%.o: $(MOCK_SRCS_DIR)/%.c | $(MOCK_OBJS_DIR) 
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TEST_OBJS_DIR)/%: $(TEST_OBJS_DIR)/%.o $(OBJS) 
+$(PORT_OBJS_DIR)/%.o: $(PORT_SRCS_DIR)/%.c | $(PORT_OBJS_DIR) 
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TEST_OBJS_DIR)/%: $(TEST_OBJS_DIR)/%.o $(OBJS) $(PORT_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-$(BENCH_OBJS_DIR)/%: $(BENCH_OBJS_DIR)/%.o $(OBJS) 
+$(BENCH_OBJS_DIR)/%: $(BENCH_OBJS_DIR)/%.o $(OBJS) $(PORT_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-$(TEST_OBJS_DIR)/%_mock: $(TEST_OBJS_DIR)/%.o $(UNMOCKED_OBJS) $(MOCK_OBJS)
+$(TEST_OBJS_DIR)/%_mock: $(TEST_OBJS_DIR)/%.o $(UNMOCKED_OBJS) $(MOCK_OBJS) $(PORT_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-$(BENCH_OBJS_DIR)/%_mock: $(BENCH_OBJS_DIR)/%.o $(UNMOCKED_OBJS) $(MOCK_OBJS)
+$(BENCH_OBJS_DIR)/%_mock: $(BENCH_OBJS_DIR)/%.o $(UNMOCKED_OBJS) $(MOCK_OBJS) $(PORT_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
 	rm -rf $(BUILD_DIR) 
 
-build: $(OBJS) $(TEST_OBJS) $(BENCH_OBJS) $(MOCK_OBJS) $(TEST_TARGETS) $(BENCH_TARGETS) $(MOCKED_TEST_TARGETS) $(MOCKED_BENCH_TARGETS)
+build: $(OBJS) $(TEST_OBJS) $(BENCH_OBJS) $(MOCK_OBJS) $(PORT_OBJS) $(TEST_TARGETS) $(BENCH_TARGETS) $(MOCKED_TEST_TARGETS) $(MOCKED_BENCH_TARGETS)
 
 test: build
 	@for test in $(TEST_TARGETS); do \
@@ -115,18 +126,22 @@ debug-info:
 	@echo "TEST_SRCS_DIR: $(TEST_SRCS_DIR)"
 	@echo "BENCH_SRCS_DIR: $(BENCH_SRCS_DIR)"
 	@echo "MOCK_SRCS_DIR: $(MOCK_SRCS_DIR)"
+	@echo "PORT_SRCS_DIR: $(PORT_SRCS_DIR)"
 	@echo "SRCS: $(SRCS)"
 	@echo "TEST_SRCS: $(TEST_SRCS)"
 	@echo "BENCH_SRCS: $(BENCH_SRCS)"
 	@echo "MOCK_SRCS: $(MOCK_SRCS)"
+	@echo "PORT_SRCS: $(PORT_SRCS)"
 	@echo "OBJS_DIR: $(OBJS_DIR)"
 	@echo "TEST_OBJS_DIR: $(TEST_OBJS_DIR)"
 	@echo "BENCH_OBJS_DIR: $(BENCH_OBJS_DIR)"
 	@echo "MOCK_OBJS_DIR: $(MOCK_OBJS_DIR)"
+	@echo "PORT_OBJS_DIR: $(PORT_OBJS_DIR)"
 	@echo "OBJS: $(OBJS)"
 	@echo "TEST_OBJS: $(TEST_OBJS)"
 	@echo "BENCH_OBJS: $(BENCH_OBJS)"
 	@echo "MOCK_OBJS: $(MOCK_OBJS)"
+	@echo "PORT_OBJS: $(PORT_OBJS)"
 	@echo "TEST_TARGETS: $(TEST_TARGETS)"
 	@echo "BENCH_TARGETS: $(BENCH_TARGETS)"
 	@echo "MOCKED_OBJS: $(MOCKED_OBJS)"

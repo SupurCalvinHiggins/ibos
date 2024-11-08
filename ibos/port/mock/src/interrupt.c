@@ -9,7 +9,10 @@ IBOS_interrupt_priority_t IBOS_interrupt_priority[IBOS_INTERRUPT_LEN] = {
     IBOS_INTERRUPT_LOW};
 
 void IBOS_interrupt_set_handler(IBOS_interrupt_id_t interrupt_id,
-                                void (*handler)(void)) {}
+                                void (*handler)(void)) {
+  (void)interrupt_id;
+  (void)handler;
+}
 
 void IBOS_interrupt_set_enable_all(IBOS_interrupt_enable_t enable) {
   IBOS_interrupt_enable_all = enable;

@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../port/include/port.h"
 #include "int.h"
 #include "memory.h"
+#include "port.h"
 
 typedef u8 IBOS_event_id_t;
 typedef IBOS_memory_block_t IBOS_event_data_t;
 
 typedef struct {
-  IBOS_event_id_t event_id;
-  IBOS_event_data_t event_data;
+  IBOS_event_id_t id;
+  IBOS_event_data_t data;
 } IBOS_event_t;
 
 typedef struct {

@@ -8,7 +8,7 @@ static void escape(void *p) { asm volatile("" : : "g"(p) : "memory"); }
 static void clobber() { asm volatile("" : : : "memory"); }
 
 void bench_memory(usize size, usize allocations, usize samples) {
-  alignas(512) u8 buffer[512 * (2 * allocations)];
+  alignas(512) u8 buffer[512 * (8 * allocations)];
   IBOS_memory_block_t memory = {buffer, sizeof(buffer)};
   IBOS_memory_initialize(memory);
 

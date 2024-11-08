@@ -1,0 +1,8 @@
+#pragma once
+
+typedef enum {
+  IBOS_PRIORITY_HIGHEST,
+  IBOS_PRIORITY_HIGH,
+  IBOS_PRIORITY_MEDIUM,
+  IBOS_PRIORITY_LOW,
+} IBOS_priority_t;
