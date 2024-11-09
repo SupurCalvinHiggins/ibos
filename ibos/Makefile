@@ -17,7 +17,7 @@ SRCS_DIR = src
 TEST_SRCS_DIR = test/src
 BENCH_SRCS_DIR = bench/src
 MOCK_SRCS_DIR = mock/src
-PORT_SRCS_DIR = port/src/$(PORT)
+PORT_SRCS_DIR = port/$(PORT)/src
 
 SRCS = $(wildcard $(SRCS_DIR)/*.c)
 TEST_SRCS = $(wildcard $(TEST_SRCS_DIR)/*.c)
@@ -115,6 +115,8 @@ bench-mock: build
 	@for bench in $(MOCKED_BENCH_TARGETS); do \
 		./$$bench; \
 	done
+
+all: build 
 	
 debug-info:
 	@echo "CC: $(CC)"

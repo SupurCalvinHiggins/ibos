@@ -1,5 +1,14 @@
 #pragma once
+
 #include <assert.h>
+
+#ifndef assert
+#define assert(x)                                                              \
+  if (!(x)) {                                                                  \
+    while (1)                                                                  \
+      ;                                                                        \
+  }
+#endif
 
 #define IBOS_assert(...) IBOS_assert_impl(__VA_ARGS__, "")
 #define IBOS_assert_impl(x, msg, ...) assert((x) && (msg));
