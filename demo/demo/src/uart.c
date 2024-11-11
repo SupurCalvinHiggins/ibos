@@ -23,6 +23,7 @@ void UART4_IRQHandler(void) {
     while (1);
 }
 
+// TODO: somehow the first byte isnt sent sometimes
 void DEMO_uart_transmit(DEMO_packet_t packet) {
     IBOS_task_enter_critical();
     assert(transmit_size == sizeof(DEMO_packet_t));
@@ -31,6 +32,7 @@ void DEMO_uart_transmit(DEMO_packet_t packet) {
     transmit_size = 0;
 //  testcache[testcachesize] = packet;
 //  ++testcachesize;
+    while (!(UART4->ISR & USART_ISR_TXE));
     UART4->CR1 |= USART_CR1_TXEIE;
     UART4->TDR = ((u8 *) &transmit_packet)[0];
     transmit_size = 1;

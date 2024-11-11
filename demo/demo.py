@@ -69,7 +69,12 @@ class Connection:
         self.send(packet.pack())
 
     def recv_packet(self) -> Packet:
-        return Packet.unpack(self.recv(Packet.SIZE))
+        data = bytes()
+        for i in range(Packet.SIZE):
+            b = self.recv(1)
+            print(i, b)
+            data += b
+        return Packet.unpack(data)
 
 
 def find_rs232() -> str:
@@ -93,7 +98,7 @@ def main() -> None:
     with ser:
         conn = Connection(ser=ser)
         while True:
-            packets = get_random_packets(max_packets=1)
+            packets = get_random_packets(max_packets=2)
             for packet in packets:
                 conn.send_packet(packet=packet)
                 print(f"sent {packet}")
