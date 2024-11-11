@@ -4,10 +4,14 @@
 #include "../include/config.h"
 #include <assert.h>
 
-void DEMO_receive_task(void) {
+usize receive_count = 0;
+
+// void DEMO_receive_task(void) {
+void TSC_IRQHandler(void) {
   while (IBOS_task_can_receive_event(DEMO_RECEIVE_ID)) {
     IBOS_event_t event = IBOS_task_receive_event(DEMO_RECEIVE_ID);
     assert(event.id == DEMO_RECEIVE_EVENT_PACKET);
+    receive_count += 1;
 
     DEMO_packet_t *packet = (DEMO_packet_t *)event.data.ptr;
     switch (packet->type) {
@@ -25,6 +29,7 @@ void DEMO_receive_task(void) {
 
 void DEMO_receive_initialize(void) {
   assert(!IBOS_interrupt_get_enable_all());
-  IBOS_task_initialize(DEMO_RECEIVE_ID, DEMO_receive_task,
+  IBOS_task_initialize(DEMO_RECEIVE_ID,
+                       TSC_IRQHandler, // DEMO_receive_task,
                        DEMO_RECEIVE_PRIORITY, DEMO_MAX_EVENTS);
 }

@@ -12,7 +12,7 @@ extern const uptr __HeapLimit;
 
 int main(void) {
     IBOS_task_enter_critical();
-    IBOS_memory_block_t memory = {(void *) 0x200001a8, __HEAP_SIZE};
+    IBOS_memory_block_t memory = {(void *) __HeapBase, __HEAP_SIZE};
     IBOS_memory_initialize(memory);
     IBOS_interrupt_initialize();
     DEMO_receive_initialize();
