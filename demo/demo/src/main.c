@@ -7,12 +7,13 @@
 #include "../include/transmit.h"
 #include "../include/uart.h"
 
-extern const uptr __HeapBase;
-extern const uptr __HeapLimit;
+extern const u8 __HeapBase;
+extern const u8 __HeapLimit;
 
 int main(void) {
     IBOS_task_enter_critical();
-    IBOS_memory_block_t memory = {(void *) __HeapBase, __HEAP_SIZE};
+    usize __HeapSize = &__HeapLimit - &__HeapBase;
+    IBOS_memory_block_t memory = {(void *) &__HeapBase, __HeapSize};
     IBOS_memory_initialize(memory);
     IBOS_interrupt_initialize();
     DEMO_receive_initialize();

@@ -1,9 +1,12 @@
 #include "../include/uart.h"
 #include "../../../ibos/include/interrupt.h"
 #include "../../../ibos/include/memory.h"
+#include "../../../ibos/include/event_queue.h"
 #include "../include/config.h"
 #include "../include/uart.h"
 #include <assert.h>
+
+IBOS_event_queue_t queue;
 
 IBOS_memory_block_t receive_block;
 usize receive_size;
@@ -17,14 +20,10 @@ void DEMO_uart_handler(void) {
         ((u8 *) receive_block.ptr)[receive_size] = UART4->RDR;
         ++receive_size;
         if (receive_size == sizeof(DEMO_packet_t)) {
-            transmit_block = receive_block;
+            IBOS_event_queue_push(&queue, (IBOS_event_t) {0, receive_block});
+
             receive_block = IBOS_memory_allocate(sizeof(DEMO_packet_t));
             receive_size = 0;
-
-            // Send it back.
-            UART4->CR1 |= USART_CR1_TXEIE;
-            UART4->TDR = ((u8 *) transmit_block.ptr)[0];
-            transmit_size = 1;
         }
     }
 
@@ -37,6 +36,14 @@ void DEMO_uart_handler(void) {
             UART4->CR1 &= ~USART_CR1_TXEIE;
             IBOS_memory_deallocate(transmit_block);
         }
+    }
+
+    if (IBOS_event_queue_size(queue)) {
+        transmit_block = IBOS_event_queue_peek(queue).data;
+        IBOS_event_queue_pop(&queue);
+        UART4->CR1 |= USART_CR1_TXEIE;
+        UART4->TDR = ((u8 *) transmit_block.ptr)[0];
+        transmit_size = 1;
     }
 }
 
@@ -124,4 +131,6 @@ void DEMO_uart_initialize(void) {
 
     receive_size = 0;
     receive_block = IBOS_memory_allocate(sizeof(DEMO_packet_t));
+
+    queue = IBOS_event_queue_allocate(16);
 }

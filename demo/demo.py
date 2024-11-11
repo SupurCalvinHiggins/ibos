@@ -93,7 +93,7 @@ def main() -> None:
     with ser:
         conn = Connection(ser=ser)
         while True:
-            packets = get_random_packets(max_packets=5)
+            packets = get_random_packets(max_packets=1)
             for packet in packets:
                 conn.send_packet(packet=packet)
                 print(f"sent {packet}")
@@ -101,7 +101,7 @@ def main() -> None:
             for _ in packets:
                 packet = conn.recv_packet()
                 print(f"recv {packet}")
-            time.sleep(random.random())
+            # time.sleep(random.random())
 
 
 if __name__ == "__main__":
