@@ -23,5 +23,6 @@ int main(void) {
     DEMO_uart_initialize();
     IBOS_task_exit_critical();
 
-    while (1);
+    SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk;
+    while (1) __WFI();
 }
