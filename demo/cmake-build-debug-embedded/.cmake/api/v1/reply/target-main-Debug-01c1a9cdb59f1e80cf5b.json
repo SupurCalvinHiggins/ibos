@@ -87,7 +87,7 @@
 				},
 				{
 					"backtrace" : 3,
-					"fragment" : "-O0"
+					"fragment" : "-O3"
 				}
 			],
 			"defines" : 
@@ -168,7 +168,7 @@
 				},
 				{
 					"backtrace" : 3,
-					"fragment" : "-O0"
+					"fragment" : "-O3"
 				}
 			],
 			"defines" : 

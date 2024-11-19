@@ -12,9 +12,9 @@ file(GLOB IBOS_PORT_SRCS "${CMAKE_SOURCE_DIR}/../ibos/port/stm32l476rg/src/*.*")
 add_executable(${PROJECT_NAME} demo/src/main.c demo/src/fast.c demo/src/receive.c demo/src/slow.c demo/src/startup.S demo/src/transmit.c demo/src/uart.c ${IBOS_SRCS} ${IBOS_PORT_SRCS})
 
 target_compile_options(${PROJECT_NAME} PRIVATE
-        -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+        -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
 )
-# -flto -ffunction-sections -fdata-sections
+# -g -O0 -O3 -flto -ffunction-sections -fdata-sections
 
 target_link_options(${PROJECT_NAME} PRIVATE
         -T${LINKER_SCRIPT}

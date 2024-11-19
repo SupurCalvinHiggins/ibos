@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_main: phony || .
 build CMakeFiles/main.dir/demo/src/main.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/main.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/main.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -60,7 +60,7 @@ build CMakeFiles/main.dir/demo/src/main.c.obj: C_COMPILER__main_unscanned_Debug 
 build CMakeFiles/main.dir/demo/src/fast.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/fast.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/fast.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -68,7 +68,7 @@ build CMakeFiles/main.dir/demo/src/fast.c.obj: C_COMPILER__main_unscanned_Debug 
 build CMakeFiles/main.dir/demo/src/receive.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/receive.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/receive.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -76,7 +76,7 @@ build CMakeFiles/main.dir/demo/src/receive.c.obj: C_COMPILER__main_unscanned_Deb
 build CMakeFiles/main.dir/demo/src/slow.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/slow.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/slow.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -84,7 +84,7 @@ build CMakeFiles/main.dir/demo/src/slow.c.obj: C_COMPILER__main_unscanned_Debug 
 build CMakeFiles/main.dir/demo/src/startup.S.obj: ASM_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/startup.S || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/startup.S.obj.d
-  FLAGS = -g -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -92,7 +92,7 @@ build CMakeFiles/main.dir/demo/src/startup.S.obj: ASM_COMPILER__main_unscanned_D
 build CMakeFiles/main.dir/demo/src/transmit.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/transmit.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/transmit.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -100,7 +100,7 @@ build CMakeFiles/main.dir/demo/src/transmit.c.obj: C_COMPILER__main_unscanned_De
 build CMakeFiles/main.dir/demo/src/uart.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/demo/demo/src/uart.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/demo/src/uart.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/demo/src
@@ -108,7 +108,7 @@ build CMakeFiles/main.dir/demo/src/uart.c.obj: C_COMPILER__main_unscanned_Debug 
 build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/event_queue.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/ibos/src/event_queue.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/event_queue.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src
@@ -116,7 +116,7 @@ build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/event_q
 build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/memory.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/ibos/src/memory.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/memory.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src
@@ -124,7 +124,7 @@ build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/memory.
 build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/ptr.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/ibos/src/ptr.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/ptr.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src
@@ -132,7 +132,7 @@ build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/ptr.c.o
 build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/task.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/ibos/src/task.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/task.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src
@@ -140,7 +140,7 @@ build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/src/task.c.
 build CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/port/stm32l476rg/src/interrupt.c.obj: C_COMPILER__main_unscanned_Debug /home/calvin/Documents/uri/ele547/ibos/ibos/port/stm32l476rg/src/interrupt.c || cmake_object_order_depends_target_main
   DEFINES = -D__HEAP_SIZE=4096 -D__NO_SYSTEM_INIT -D__STACK_SIZE=4096 -D__START=main -D__STARTUP_CLEAR_BSS
   DEP_FILE = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/port/stm32l476rg/src/interrupt.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O0
+  FLAGS = -g -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -Wall -Wextra -g -O3
   INCLUDES = -I/home/calvin/Documents/uri/ele547/ibos/demo/demo/include -I/home/calvin/Documents/uri/ele547/ibos/demo/../ibos/include
   OBJECT_DIR = CMakeFiles/main.dir
   OBJECT_FILE_DIR = CMakeFiles/main.dir/home/calvin/Documents/uri/ele547/ibos/ibos/port/stm32l476rg/src

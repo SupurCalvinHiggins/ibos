@@ -101,7 +101,7 @@ def main() -> None:
             for _ in packets:
                 packet = conn.recv_packet()
                 print(f"recv {packet}")
-            time.sleep(10 * random.random())
+            # time.sleep(10 * random.random())
         end = time.time()
         print(f"time {end - start}")
 
