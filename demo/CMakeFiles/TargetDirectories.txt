@@ -1,3 +1,0 @@
-/home/calvin/Documents/uri/ele547/ibos/demo/CMakeFiles/main.dir
-/home/calvin/Documents/uri/ele547/ibos/demo/CMakeFiles/edit_cache.dir
-/home/calvin/Documents/uri/ele547/ibos/demo/CMakeFiles/rebuild_cache.dir
