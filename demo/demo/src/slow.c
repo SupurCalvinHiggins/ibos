@@ -3,8 +3,7 @@
 #include "../include/config.h"
 #include <assert.h>
 
-// void DEMO_slow_task(void) {
-void FPU_IRQHandler(void) {
+void DEMO_slow_task(void) {
   while (IBOS_task_can_receive_event(DEMO_SLOW_ID)) {
     IBOS_event_t event = IBOS_task_receive_event(DEMO_SLOW_ID);
     DEMO_packet_t *packet = (DEMO_packet_t *)event.data.ptr;
@@ -26,7 +25,6 @@ void FPU_IRQHandler(void) {
 
 void DEMO_slow_initialize(void) {
   assert(!IBOS_interrupt_get_enable_all());
-  IBOS_task_initialize(DEMO_SLOW_ID,
-                       FPU_IRQHandler, // DEMO_slow_task,
-                       DEMO_SLOW_PRIORITY, DEMO_MAX_EVENTS);
+  IBOS_task_initialize(DEMO_SLOW_ID, DEMO_slow_task, DEMO_SLOW_PRIORITY,
+                       DEMO_MAX_EVENTS);
 }

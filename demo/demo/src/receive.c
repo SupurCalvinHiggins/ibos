@@ -6,8 +6,7 @@
 
 usize receive_count = 0;
 
-// void DEMO_receive_task(void) {
-void TSC_IRQHandler(void) {
+void DEMO_receive_task(void) {
   while (IBOS_task_can_receive_event(DEMO_RECEIVE_ID)) {
     IBOS_event_t event = IBOS_task_receive_event(DEMO_RECEIVE_ID);
     assert(event.id == DEMO_RECEIVE_EVENT_PACKET);
@@ -29,7 +28,6 @@ void TSC_IRQHandler(void) {
 
 void DEMO_receive_initialize(void) {
   assert(!IBOS_interrupt_get_enable_all());
-  IBOS_task_initialize(DEMO_RECEIVE_ID,
-                       TSC_IRQHandler, // DEMO_receive_task,
+  IBOS_task_initialize(DEMO_RECEIVE_ID, DEMO_receive_task,
                        DEMO_RECEIVE_PRIORITY, DEMO_MAX_EVENTS);
 }

@@ -1,3 +1,0 @@
-/home/calvin/Documents/uri/ele547/ibos/demo/cmake-build-debug-embedded/CMakeFiles/main.dir
-/home/calvin/Documents/uri/ele547/ibos/demo/cmake-build-debug-embedded/CMakeFiles/edit_cache.dir
-/home/calvin/Documents/uri/ele547/ibos/demo/cmake-build-debug-embedded/CMakeFiles/rebuild_cache.dir

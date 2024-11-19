@@ -3,8 +3,7 @@
 #include "../include/config.h"
 #include <assert.h>
 
-// void DEMO_fast_task(void) {
-void RNG_IRQHandler(void) {
+void DEMO_fast_task(void) {
   while (IBOS_task_can_receive_event(DEMO_FAST_ID)) {
     IBOS_event_t event = IBOS_task_receive_event(DEMO_FAST_ID);
     DEMO_packet_t *packet = (DEMO_packet_t *)event.data.ptr;
@@ -24,6 +23,6 @@ void RNG_IRQHandler(void) {
 
 void DEMO_fast_initialize(void) {
   assert(!IBOS_interrupt_get_enable_all());
-  IBOS_task_initialize(DEMO_FAST_ID, RNG_IRQHandler, // DEMO_fast_task,
-                       DEMO_FAST_PRIORITY, DEMO_MAX_EVENTS);
+  IBOS_task_initialize(DEMO_FAST_ID, DEMO_fast_task, DEMO_FAST_PRIORITY,
+                       DEMO_MAX_EVENTS);
 }

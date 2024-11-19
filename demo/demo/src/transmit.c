@@ -15,8 +15,7 @@ DEMO_transmit_task_state_t DEMO_transmit_state;
 IBOS_event_queue_t DEMO_transmit_queue;
 usize transmit_count = 0;
 
-// void DEMO_transmit_task(void) {
-void LCD_IRQHandler(void) {
+void DEMO_transmit_task(void) {
   while (IBOS_task_can_receive_event(DEMO_TRANSMIT_ID)) {
     IBOS_event_t event = IBOS_task_receive_event(DEMO_TRANSMIT_ID);
     switch (event.id) {
@@ -47,7 +46,7 @@ void LCD_IRQHandler(void) {
 
 void DEMO_transmit_initialize(void) {
   assert(!IBOS_interrupt_get_enable_all());
-  IBOS_task_initialize(DEMO_TRANSMIT_ID, LCD_IRQHandler, // DEMO_transmit_task,
+  IBOS_task_initialize(DEMO_TRANSMIT_ID, DEMO_transmit_task,
                        DEMO_TRANSMIT_PRIORITY, DEMO_MAX_EVENTS);
   DEMO_transmit_state = DEMO_TRANSMIT_STATE_READY;
   DEMO_transmit_queue = IBOS_event_queue_allocate(DEMO_MAX_EVENTS);
